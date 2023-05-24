@@ -3,11 +3,11 @@ node {
          checkout scm
      }
      stage('Build image') {
-         app = docker.build("gasbugs/flask-example")
+         app = docker.build("cykim43/flask-example")
          
      }
      stage('Push image') {
-         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
              app.push("${env.BUILD_NUMBER}")
              app.push("latest")
          }
@@ -15,11 +15,11 @@ node {
 }
 
 stage('Build image') {
-  app = docker.build("gasbugs/flask-example")
+  app = docker.build("cykim43/flask-example")
 }
 
 stage('Push image') {
-  docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') 
+  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') 
   {
      app.push("${env.BUILD_NUMBER}")
      app.push("latest")
